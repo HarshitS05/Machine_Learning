@@ -7,22 +7,14 @@ from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.model_selection import KFold
 from sklearn.metrics import recall_score, f1_score, matthews_corrcoef
 
-# ---------------------------------------
-# Step 1: Load Yeast Dataset
-# ---------------------------------------
 data = pd.read_csv("yeast.csv")
 
-X = data.iloc[:, 1:-1]   # features
-y = data.iloc[:, -1]    # target (localization site)
+X = data.iloc[:, 1:-1]  
+y = data.iloc[:, -1]   
 
-# ---------------------------------------
-# Step 2: K-Fold Cross Validation
-# ---------------------------------------
 kf = KFold(n_splits=5, shuffle=True, random_state=42)
 
-# ---------------------------------------
-# Step 3: Models (Single + Ensembles)
-# ---------------------------------------
+
 models = {
     "Decision Tree": DecisionTreeClassifier(random_state=42),
     "Random Forest (Bagging)": RandomForestClassifier(
@@ -35,9 +27,7 @@ models = {
     )
 }
 
-# ---------------------------------------
-# Step 4: Evaluation
-# ---------------------------------------
+
 for name, model in models.items():
 
     recalls, f1s, mccs = [], [], []
